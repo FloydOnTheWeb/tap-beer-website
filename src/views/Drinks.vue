@@ -1,8 +1,8 @@
 <template>
   <div class="drinks container">
-    <div class="row flex-column-reverse flex-lg-row drinks-slider">
-      <div class="col-md-6 my-auto"><DrinksCarousel /></div>
-      <div class="col-md-6 pt-2 pb-2 my-auto">
+    <div class="row flex-column-reverse flex-md-row drinks-slider">
+      <div class="col-sm-12 col-md-6 my-auto"><DrinksCarousel /></div>
+      <div class="col-sm-12 col-md-6 pt-2 pb-2 my-auto">
         <img alt="Vue logo" src="../assets/tap-beer.png" />
         <h1 class="h5">Our full range of premium beers</h1>
       </div>
@@ -35,6 +35,7 @@ export default {
 .drinks-table{
   background-color:#ffffff;
 }
+#display-beers >>> .table-bordered {background: #fecb89;}
 #display-beers >>> .table.vue-table thead > tr > th,
 #display-beers >>> .btn.btn-outline-primary.active, #display-beers >>> .btn-outline-primary{
   background-color: #eebb4d;
