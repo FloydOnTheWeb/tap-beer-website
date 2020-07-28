@@ -9,20 +9,31 @@
     </div>
     <div class="container">
       <div class="row">
-      <div v-for="drink in drinks" v-bind:key="drink.id" class="drink-specials col-md-3 pt-1 pb-1" >
-        <div class="row no-gutters">
-          <div class="col-md-2">
-            <img :src="drink.image_url" class="card-img" :alt="drink.name" :id="drink.id" />
-          </div>
-          <div class="col-md-10">
-            <div class="card-body">
-              <div class="card-title">{{ drink.name }}</div>
-              <p class="card-text tagline">{{ drink.tagline }}</p>
-              <small class="card-text">{{ drink.volume.value }} {{ drink.volume.unit }}</small>
+        <div
+          v-for="drink in drinks"
+          v-bind:key="drink.id"
+          class="drink-specials col-md-3 p-4"
+        >
+          <div class="row no-gutters">
+            <div class="col-md-2">
+              <img
+                :src="drink.image_url"
+                class="card-img"
+                :alt="drink.name"
+                :id="drink.id"
+              />
+            </div>
+            <div class="col-md-10">
+              <div class="card-body">
+                <div class="card-title">{{ drink.name }}</div>
+                <p class="card-text tagline mb-1">{{ drink.tagline }}</p>
+                <small class="card-text"
+                  >{{ drink.volume.value }} {{ drink.volume.unit }}</small
+                >
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   </div>
@@ -62,12 +73,23 @@ export default {
   background-size: cover;
   background-blend-mode: soft-light;
 }
-.drink-specials{background-color:#eebb4d;}
-.card-title{background-color:#1f2b33; color:#ffffff;border-radius:.25em;padding-top:.25em;padding-bottom:.25em;}
-.card-text.tagline{font-size:0.9em;}
-@media screen and (max-width: 764px) {
-    .card-img{  max-height: 240px;
-    width: auto;}
+.drink-specials {
+  background-color: #eebb4d;
 }
-
+.card-title {
+  background-color: #1f2b33;
+  color: #ffffff;
+  border-radius: 0.25em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+}
+.card-text.tagline {
+  font-size: 0.9em;
+}
+@media screen and (max-width: 764px) {
+  .card-img {
+    max-height: 240px;
+    width: auto;
+  }
+}
 </style>

@@ -13,16 +13,18 @@
 </template>
 
 <style scoped>
-.breadcrumb-container{background-color: #1f2b33d9;}
-.breadcrumb{
+.breadcrumb-container {
+  background-color: #1f2b33d9;
+}
+.breadcrumb {
   padding: 0.5rem 1rem;
   color: #ebecf1;
   border-radius: 0;
   background-color: transparent;
 }
-.breadcrumb a{
-    color: #ebecf1;
-    text-decoration: none;
-    font-size: 0.9em;
+.breadcrumb a {
+  color: #ebecf1;
+  text-decoration: none;
+  font-size: 0.9em;
 }
 </style>
