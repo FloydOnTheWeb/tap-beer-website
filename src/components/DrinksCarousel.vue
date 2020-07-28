@@ -14,14 +14,15 @@
         style="color:#1f2b33"
         img-blank
       >
-        <div class="drink-caption pb-2">{{ drink.name }}</div>
-        <img
-          class=""
-          width="auto"
-          height="150"
-          :src="drink.image_url"
-          :alt="drink.name"
-        />
+        <router-link :to="`/drinks/${drink.id}`" class="no-style">
+          <div class="drink-caption pb-2">{{ drink.name }}</div>
+          <img
+            class=""
+            width="auto"
+            height="150"
+            :src="drink.image_url"
+            :alt="drink.name"
+        /></router-link>
       </b-carousel-slide>
     </b-carousel>
   </div>
@@ -61,14 +62,17 @@ export default {
 </script>
 
 <style scoped>
+.no-style {
+  text-decoration: none;
+}
 .carousel-item {
   width: 100%;
   height: 260px;
 }
 .drink-caption {
-    font-size: 1.2em;
-    width: 100%;
-    color: #1f2b33;
-    font-weight: bold;
+  font-size: 1.2em;
+  width: 100%;
+  color: #1f2b33;
+  font-weight: bold;
 }
 </style>

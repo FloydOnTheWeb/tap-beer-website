@@ -4,8 +4,8 @@
       <router-link class="nav-link navbar-brand" to="/">
         <img
           src="../assets/tap-beer.png"
-          width="80"
-          height="40"
+          width="100"
+          height="50"
           class="d-inline-block align-top"
           alt="tap beer logo"
           loading="lazy"
@@ -41,23 +41,16 @@
 </template>
 
 <style scoped>
-#nav {
-  display: flex;
-  justify-content: center;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #1f2b33;
-  text-decoration: none;
+.navbar-light .navbar-toggler {
+  border-color: #eebb4d;
+  outline: 0;
+  background-color: #eebb4d;
 }
 .navbar-light .navbar-nav .nav-link {
-  color: rgba(31, 43, 51, 0.6);
+  color: rgba(31, 43, 51, 1);
   text-decoration: none;
+  letter-spacing: 1px;
+  min-width: 100px;
 }
 
 #nav a.router-link-exact-active {
@@ -66,8 +59,12 @@
 
 .nav-container {
   background-color: #ffe78f;
+  background-image: url(/img/barley-field.af3219ca.jpg);
+  background-blend-mode: screen;
 }
 .navbar-light .navbar-nav .nav-link.router-link-active {
-  color: #1f2b33;
+  color: rgba(31, 43, 51, 1);
+  background-color: rgba(254, 203, 137, 0.8);
+  border-radius: 0.2em;
 }
 </style>
