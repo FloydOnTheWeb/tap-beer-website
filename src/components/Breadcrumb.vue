@@ -1,30 +1,44 @@
 <template>
   <nav class="breadcrumb-container" aria-label="breadcrumb">
     <ol class="container breadcrumb mb-0">
-      <li class="breadcrumb-item active">
-        <router-link to="/">Home</router-link>
-      </li>
-      <li class="breadcrumb-item" aria-current="page">
-        <router-link to="/about">About</router-link>
+      <!-- <li class="breadcrumb-item"><router-link to="/">Home</router-link></li> -->
+      <li
+        v-for="route in $route.matched"
+        v-bind:key="route.fullpath"
+        class="breadcrumb-item"
+      >
+        <router-link :to="{ name: route.name }">
+          {{ route.meta.breadcrumb }}
+        </router-link>
       </li>
     </ol>
   </nav>
-  <!-- TODO: dynammic breadcrumbs -->
 </template>
+
+<script>
+export default {};
+</script>
 
 <style scoped>
 .breadcrumb-container {
-  background-color: #1f2b33d9;
+  background-color: #1f2b33;
 }
 .breadcrumb {
   padding: 0.5rem 1rem;
-  color: #ebecf1;
+  color: #919ea9;
   border-radius: 0;
   background-color: transparent;
+  font-size: 1em;
 }
-.breadcrumb a {
-  color: #ebecf1;
+.breadcrumb-item,
+.breadcrumb-item a,
+.breadcrumb-item.active {
+  color: #919ea9;
   text-decoration: none;
-  font-size: 0.9em;
+}
+@media screen and (max-width: 786px) {
+  .breadcrumb {
+    font-size: initial;
+  }
 }
 </style>

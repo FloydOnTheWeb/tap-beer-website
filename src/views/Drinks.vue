@@ -31,38 +31,53 @@ export default {
   background-position: center center;
   background-size: cover;
   background-blend-mode: soft-light;
+  border-radius: 0 0 2em 2em;
 }
-.drinks-table{
-  background-color:#ffffff;
+.drinks-table {
+  background-color: #ffffff;
 }
-#display-beers >>> .table-bordered {background: #fecb89;}
+#display-beers >>> .table-bordered {
+  background: #fecb89;
+}
 #display-beers >>> .table.vue-table thead > tr > th,
-#display-beers >>> .btn.btn-outline-primary.active, #display-beers >>> .btn-outline-primary{
+#display-beers >>> .btn.btn-outline-primary.active,
+#display-beers >>> .btn-outline-primary {
   background-color: #eebb4d;
   border-color: #1f2b33;
-  color:#1f2b33;
+  color: #1f2b33;
 }
-#display-beers >>> .btn.btn-outline-primary.active{font-weight: bold;}
-#display-beers >>> .table-bordered td{border-color: #1f2b33;}
-#display-beers >>> .btn-toolbar {justify-content: space-around;}
+#display-beers >>> .btn.btn-outline-primary.active {
+  font-weight: bold;
+}
+#display-beers >>> .table-bordered td {
+  border-color: #1f2b33;
+}
+#display-beers >>> .btn-toolbar {
+  justify-content: space-around;
+}
 #display-beers >>> .table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(253, 231, 167, .5);
+  background-color: rgba(253, 231, 167, 0.5);
 }
 #display-beers >>> .form-control {
   background-color: #ffeeba;
   border: 1px solid #fecb89;
-  color:#1f2b33;
+  color: #1f2b33;
 }
 .drinks-carousel >>> .carousel-control-prev-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%231f2b33' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%231f2b33' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
 }
 
 .drinks-carousel >>> .carousel-control-next-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%231f2b33' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%231f2b33' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
 }
 .drinks-carousel >>> .carousel-control-next,
 .drinks-carousel >>> .carousel-control-prev {
   opacity: 1;
   color: #1f2b33;
+}
+@media screen and (max-width: 986px) {
+  .drinks-slider {
+    border-radius: 0;
+  }
 }
 </style>

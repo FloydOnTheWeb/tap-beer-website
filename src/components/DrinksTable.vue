@@ -11,6 +11,7 @@
       :pageSize="5"
       :multi-column-sortable="true"
       :filter-case-sensitive="false"
+      :row-click-handler="showDrinkDetails"
     >
       <template v-slot:name="slotProps">
         {{ slotProps.value.name }}
@@ -36,23 +37,76 @@ export default {
     return {
       columns: [
         {
-          title: "id"
+          title: "Product code",
+          name: "id"
         },
         {
-          title: "name",
+          title: "Name",
+          name: "name",
           visible: true,
           editable: false,
           sortable: true
         },
         {
-          title: "tagline",
+          title: "Tagline",
+          name: "tagline",
           visible: true,
           editable: false,
           sortable: true
         },
         {
-          title: "description",
+          title: "Established Since",
+          name: "first_brewed",
           visible: true,
+          editable: false,
+          sortable: true
+        },
+        {
+          title: "Alchohol Content",
+          name: "abv",
+          visible: true,
+          editable: false,
+          sortable: true
+        },
+        {
+          title: "Bitterness",
+          name: "ibu",
+          visible: true,
+          editable: false,
+          sortable: true
+        },
+        {
+          title: "Colour scale",
+          name: "srm",
+          visible: true,
+          editable: false,
+          sortable: true
+        },
+        {
+          title: "ph level",
+          name: "ph",
+          visible: true,
+          editable: false,
+          sortable: true
+        },
+        {
+          title: "Sugars consumed",
+          name: "attenuation_level",
+          visible: true,
+          editable: false,
+          sortable: true
+        },
+        {
+          title: "Description",
+          name: "description",
+          visible: false,
+          editable: false,
+          sortable: true
+        },
+        {
+          title: "Tips",
+          name: "brewers_tips",
+          visible: false,
           editable: false,
           sortable: true
         }
@@ -69,6 +123,9 @@ export default {
         .get("https://api.punkapi.com/v2/beers")
         .then(response => (this.values = response.data))
         .catch(error => console.log(error));
+    },
+    showDrinkDetails(event, entry) {
+      this.$router.push({ path: `/drinks/${entry.id}` });
     }
   }
 };
