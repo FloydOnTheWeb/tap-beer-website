@@ -19,7 +19,12 @@
           >
             <div class="row flex-column-reverse flex-lg-row no-gutters">
               <div class="col-sm-12 col-md-2">
-                <router-link :to="`/drinks/${drink.id}`" class="no-style"
+                <router-link
+                  :to="{
+                    path: `/drinks/${drink.id}`,
+                    params: { id: drink.id }
+                  }"
+                  class="no-style"
                   ><img
                     :src="drink.image_url"
                     class="card-img"

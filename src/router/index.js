@@ -52,39 +52,35 @@ const routes = [
     path: "/",
     name: "Home",
     meta: { breadcrumb: "Home" },
-    component: Home,
-      },
-      {
-        path: "/drinks",
-        name: "Drinks",
-        meta: { breadcrumb: "Drinks" },
-        component: () =>
-          import(/* webpackChunkName: "drinks" */ "../views/Drinks.vue"),
-              },
-              {
-            path: "/drinks/:id",
-            name: "Drink",
-            meta: { breadcrumb: "Drink" },
-            component: () =>
-              import(
-                /* webpackChunkName: "drink" */ "../views/DrinkDetails.vue"
-              )
-
-      },
-      {
-        path: "/about",
-        name: "About",
-        meta: { breadcrumb: "About" },
-        component: () =>
-          import(/* webpackChunkName: "about" */ "../views/About.vue")
-      },
-      {
-        path: "/contact",
-        name: "Contact",
-        meta: { breadcrumb: "Contact" },
-        component: () =>
-          import(/* webpackChunkName: "contact" */ "../views/Contact.vue")
-
+    component: Home
+  },
+  {
+    path: "/drinks",
+    name: "Drinks",
+    meta: { breadcrumb: "Drinks" },
+    component: () =>
+      import(/* webpackChunkName: "drinks" */ "../views/Drinks.vue")
+  },
+  {
+    path: "/drinks/:id",
+    name: "Drink",
+    meta: { breadcrumb: "Drink" },
+    component: () =>
+      import(/* webpackChunkName: "drink" */ "../views/DrinkDetails.vue")
+  },
+  {
+    path: "/about",
+    name: "About",
+    meta: { breadcrumb: "About" },
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/About.vue")
+  },
+  {
+    path: "/contact",
+    name: "Contact",
+    meta: { breadcrumb: "Contact" },
+    component: () =>
+      import(/* webpackChunkName: "contact" */ "../views/Contact.vue")
   }
 ];
 
