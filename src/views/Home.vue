@@ -15,7 +15,7 @@
           <div
             v-for="drink in drinks"
             v-bind:key="drink.id"
-            class="drink-specials col-md-3 p-4"
+            class="drink-specials col-sm-3 p-4"
           >
             <div class="row flex-column-reverse flex-lg-row no-gutters">
               <div class="col-sm-12 col-md-2">
@@ -37,7 +37,9 @@
                   <router-link :to="`/drinks/${drink.id}`" class="no-style"
                     ><div class="card-title">{{ drink.name }}</div></router-link
                   >
-                  <p class="card-text tagline mb-1">{{ drink.tagline }}</p>
+                  <p class="card-text tagline mb-1">
+                    {{ drink.tagline.replace(".", "") }}
+                  </p>
                   <small class="card-text"
                     >{{ drink.volume.value }} {{ drink.volume.unit }}</small
                   >

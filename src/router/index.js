@@ -1,51 +1,10 @@
 import Vue from "vue";
+import VueBreadcrumbs from "vue-2-breadcrumbs";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
-
-// const routes = [
-//   {
-//     path: "/",
-//     name: "Home",
-//     meta: { breadcrumb: "Home" },
-//     component: Home,
-//     children: [
-//       {
-//         path: "drinks/",
-//         name: "Drinks",
-//         meta: { breadcrumb: "Drinks" },
-//         component: () =>
-//           import(/* webpackChunkName: "drinks" */ "../views/Drinks.vue"),
-//         children: [
-//           {
-//             path: ":id/",
-//             name: "Drink",
-//             meta: { breadcrumb: "Drink" },
-//             component: () =>
-//               import(
-//                 /* webpackChunkName: "drink" */ "../views/DrinkDetails.vue"
-//               )
-//           }
-//         ]
-//       },
-//       {
-//         path: "about/",
-//         name: "About",
-//         meta: { breadcrumb: "About" },
-//         component: () =>
-//           import(/* webpackChunkName: "about" */ "../views/About.vue")
-//       },
-//       {
-//         path: "contact/",
-//         name: "Contact",
-//         meta: { breadcrumb: "Contact" },
-//         component: () =>
-//           import(/* webpackChunkName: "contact" */ "../views/Contact.vue")
-//       }
-//     ]
-//   }
-// ];
+Vue.use(VueBreadcrumbs);
 
 const routes = [
   {
@@ -57,28 +16,28 @@ const routes = [
   {
     path: "/drinks",
     name: "Drinks",
-    meta: { breadcrumb: "Drinks" },
+    meta: { breadcrumb: { label: "Drinks", parent: "Home" } },
     component: () =>
       import(/* webpackChunkName: "drinks" */ "../views/Drinks.vue")
   },
   {
     path: "/drinks/:id",
     name: "Drink",
-    meta: { breadcrumb: "Drink" },
+    meta: { breadcrumb: { label: "Drink", parent: "Drinks" } },
     component: () =>
       import(/* webpackChunkName: "drink" */ "../views/DrinkDetails.vue")
   },
   {
     path: "/about",
     name: "About",
-    meta: { breadcrumb: "About" },
+    meta: { breadcrumb: { label: "About", parent: "Home" } },
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue")
   },
   {
     path: "/contact",
     name: "Contact",
-    meta: { breadcrumb: "Contact" },
+    meta: { breadcrumb: { label: "Contact", parent: "Home" } },
     component: () =>
       import(/* webpackChunkName: "contact" */ "../views/Contact.vue")
   }

@@ -1,23 +1,8 @@
 <template>
-  <nav class="breadcrumb-container" aria-label="breadcrumb">
-    <ol class="container breadcrumb mb-0">
-      <!-- <li class="breadcrumb-item"><router-link to="/">Home</router-link></li> -->
-      <li
-        v-for="route in $route.matched"
-        v-bind:key="route.fullpath"
-        class="breadcrumb-item"
-      >
-        <router-link :to="{ name: route.name }">
-          {{ route.meta.breadcrumb }}
-        </router-link>
-      </li>
-    </ol>
-  </nav>
+  <div class="breadcrumb-container">
+    <Breadcrumbs class="container breadcrumb mb-0" />
+  </div>
 </template>
-
-<script>
-export default {};
-</script>
 
 <style scoped>
 .breadcrumb-container {
@@ -32,7 +17,10 @@ export default {};
 }
 .breadcrumb-item,
 .breadcrumb-item a,
-.breadcrumb-item.active {
+.breadcrumb-item.active,
+.breadcrumb-item.active a,
+.breadcrumb-container > a,
+a.router-link-active {
   color: #919ea9;
   text-decoration: none;
 }

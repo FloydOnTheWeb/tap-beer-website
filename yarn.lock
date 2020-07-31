@@ -8027,6 +8027,11 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
+vue-2-breadcrumbs@^0.7.9:
+  version "0.7.9"
+  resolved "https://registry.yarnpkg.com/vue-2-breadcrumbs/-/vue-2-breadcrumbs-0.7.9.tgz#90ffb6628368ed5baba94a8c6d5ae92c1324fc6d"
+  integrity sha512-pySvT3uIbzx9IR5/YAXu3uNDd+JZF/5ZuG9j/DYuCI9Aqzw+IjHsDQub5/CiFZJIR7gVaZUk94dtaKfgQXzK2A==
+
 vue-axios@^2.1.5:
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/vue-axios/-/vue-axios-2.1.5.tgz#1af4bf1218ed71309c76afb38d0f683e312c24a7"
