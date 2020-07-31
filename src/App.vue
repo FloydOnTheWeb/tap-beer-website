@@ -27,4 +27,10 @@ export default {
   text-align: center;
   color: #1f2b33;
 }
+
+.breadcrumb-container > a,
+a.router-link-active {
+  color: #919ea9;
+  text-decoration: none;
+}
 </style>

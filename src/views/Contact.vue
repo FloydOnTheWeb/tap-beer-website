@@ -15,7 +15,7 @@
                   class="form-control"
                   id="name"
                   aria-describedby="emailHelp"
-                  placeholder="Enter name"
+                  placeholder=""
                   required
                 />
               </div>
@@ -26,7 +26,7 @@
                   class="form-control"
                   id="email"
                   aria-describedby="emailHelp"
-                  placeholder="Enter email"
+                  placeholder=""
                   required
                 />
                 <small id="emailHelp" class="form-text text-muted"
