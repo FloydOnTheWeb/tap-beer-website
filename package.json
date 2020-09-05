@@ -12,6 +12,7 @@
     "bootstrap-vue": "^2.1.0",
     "core-js": "^3.6.5",
     "jquery": "^3.5.1",
+    "react-scripts": "^3.4.3",
     "vue": "^2.6.11",
     "vue-2-breadcrumbs": "^0.7.9",
     "vue-axios": "^2.1.5",

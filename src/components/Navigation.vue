@@ -26,13 +26,31 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto justify-content-end">
           <li class="nav-item">
-            <router-link class="nav-link" to="/about">About</router-link>
+            <router-link
+              class="nav-link"
+              to="/about"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              >About</router-link
+            >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/drinks">Drinks</router-link>
+            <router-link
+              class="nav-link"
+              to="/drinks"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              >Drinks</router-link
+            >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/contact">Contact</router-link>
+            <router-link
+              class="nav-link"
+              to="/contact"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              >Contact</router-link
+            >
           </li>
         </ul>
       </div>
@@ -66,5 +84,12 @@
   color: rgba(31, 43, 51, 1);
   background-color: rgba(254, 203, 137, 0.8);
   border-radius: 0.2em;
+}
+@media (min-width: 968px) {
+  #navbarSupportedContent {
+    display: block;
+    height: auto !important;
+    visibility: visible;
+  }
 }
 </style>

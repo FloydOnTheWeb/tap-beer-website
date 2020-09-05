@@ -125,7 +125,7 @@ export default {
         .catch(error => console.log(error));
     },
     showDrinkDetails(event, entry) {
-     this.$router.push({
+      this.$router.push({
         path: `/drinks/${entry.id}`,
         id: "`${entry.id}`",
         props: true
