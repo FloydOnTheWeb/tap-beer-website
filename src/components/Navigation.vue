@@ -77,7 +77,7 @@
 
 .nav-container {
   background-color: #ffe78f;
-  background-image: url(/img/barley-field.af3219ca.jpg);
+background-image: url('~@/assets/barley-field.jpg');
   background-blend-mode: screen;
 }
 .navbar-light .navbar-nav .nav-link.router-link-active {

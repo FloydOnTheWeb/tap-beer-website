@@ -3,19 +3,19 @@
     <Navigation />
     <Breadcrumb />
     <router-view />
-    <Footer />
+    <AppFooter />
   </div>
 </template>
 <script>
 import Navigation from "@/components/Navigation";
 import Breadcrumb from "@/components/Breadcrumb.vue";
-import Footer from "@/components/Footer.vue";
+import AppFooter from "@/components/AppFooter.vue";
 
 export default {
   components: {
     Navigation,
     Breadcrumb,
-    Footer
+    AppFooter
   }
 };
 </script>
