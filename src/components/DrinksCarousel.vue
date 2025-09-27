@@ -1,78 +1,171 @@
 <template>
   <div class="drinks-carousel">
-    <b-carousel
-      id="carousel-no-animation"
-      style="color:#1f2b33"
-      controls
-      background="transparent"
-      img-width="1"
-      img-height="1"
-    >
-      <b-carousel-slide
-        v-for="drink in drinks"
-        v-bind:key="drink.id"
-        style="color:#1f2b33"
-        img-blank
+    <div class="relative">
+      <!-- Carousel Container -->
+      <div class="overflow-hidden rounded-lg">
+        <div
+          class="flex transition-transform duration-500 ease-in-out"
+          :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
+        >
+          <div
+            v-for="drink in drinks"
+            :key="drink.id"
+            class="w-full flex-shrink-0"
+          >
+            <router-link
+              :to="{ name: 'Drink', params: { id: drink.id } }"
+              class="block group"
+            >
+              <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                <h3
+                  class="text-xl font-bold text-beer-dark mb-4 group-hover:text-beer-orange transition-colors duration-200"
+                >
+                  {{ drink.name }}
+                </h3>
+                <div class="flex justify-center mb-4">
+                  <img
+                    :src="`https://punkapi.online/v3/images/${String(drink.id).padStart(3, '0')}.png`"
+                    :alt="drink.name"
+                    class="h-32 w-auto object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <p class="text-beer-dark/70 text-sm">
+                  {{ drink.tagline }}
+                </p>
+              </div>
+            </router-link>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <button
+        @click="previousSlide"
+        class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-beer-gold hover:bg-beer-orange text-beer-dark p-2 rounded-full shadow-lg transition-colors duration-200"
+        :disabled="currentSlide === 0"
       >
-        <router-link :to="`/drinks/${drink.id}`" class="no-style">
-          <div class="drink-caption pb-2">{{ drink.name }}</div>
-          <img
-            class=""
-            width="auto"
-            height="150"
-            :src="drink.image_url"
-            :alt="drink.name"
-        /></router-link>
-      </b-carousel-slide>
-    </b-carousel>
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"
+          ></path>
+        </svg>
+      </button>
+
+      <button
+        @click="nextSlide"
+        class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-beer-gold hover:bg-beer-orange text-beer-dark p-2 rounded-full shadow-lg transition-colors duration-200"
+        :disabled="currentSlide >= drinks.length - 1"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          ></path>
+        </svg>
+      </button>
+
+      <!-- Dots Indicator -->
+      <div class="flex justify-center mt-6 space-x-2">
+        <button
+          v-for="(drink, index) in drinks"
+          :key="index"
+          @click="goToSlide(index)"
+          class="w-3 h-3 rounded-full transition-colors duration-200"
+          :class="index === currentSlide ? 'bg-beer-gold' : 'bg-gray-300'"
+        ></button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-import { BCarousel } from "bootstrap-vue";
-Vue.component("b-carousel", BCarousel);
-
+import { defineComponent, ref, onMounted, onUnmounted } from "vue";
 import axios from "axios";
-import VueAxios from "vue-axios";
-Vue.use(VueAxios, axios);
 
-export default {
-  components: {
-    BCarousel
-  },
-  mounted() {
-    this.fetchDrinks();
-  },
-  data() {
+export default defineComponent({
+  name: "DrinksCarousel",
+  setup() {
+    const drinks = ref([]);
+    const currentSlide = ref(0);
+    const apiPage = ref(1);
+    const perPage = ref(10);
+    let autoSlideInterval = null;
+
+    const fetchDrinks = async () => {
+      try {
+        const response = await axios.get(
+          `https://punkapi.online/v3/beers?page=${apiPage.value}&per_page=${perPage.value}`,
+        );
+        drinks.value = response.data;
+      } catch (error) {
+        console.error("Error fetching drinks:", error);
+      }
+    };
+
+    const nextSlide = () => {
+      if (currentSlide.value < drinks.value.length - 1) {
+        currentSlide.value++;
+      } else {
+        currentSlide.value = 0;
+      }
+    };
+
+    const previousSlide = () => {
+      if (currentSlide.value > 0) {
+        currentSlide.value--;
+      } else {
+        currentSlide.value = drinks.value.length - 1;
+      }
+    };
+
+    const goToSlide = (index) => {
+      currentSlide.value = index;
+    };
+
+    const startAutoSlide = () => {
+      autoSlideInterval = setInterval(nextSlide, 5000);
+    };
+
+    const stopAutoSlide = () => {
+      if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = null;
+      }
+    };
+
+    onMounted(() => {
+      fetchDrinks().then(() => {
+        startAutoSlide();
+      });
+    });
+
+    onUnmounted(() => {
+      stopAutoSlide();
+    });
+
     return {
-      drinks: []
+      drinks,
+      currentSlide,
+      nextSlide,
+      previousSlide,
+      goToSlide,
     };
   },
-
-  methods: {
-    fetchDrinks() {
-      axios
-        .get("https://api.punkapi.com/v2/beers")
-        .then(response => (this.drinks = response.data))
-        .catch(error => console.log(error));
-    }
-  }
-};
+});
 </script>
-
-<style scoped>
-.no-style {
-  text-decoration: none;
-}
-.carousel-item {
-  width: 100%;
-  height: 260px;
-}
-.drink-caption {
-  font-size: 1.2em;
-  width: 100%;
-  color: #1f2b33;
-  font-weight: bold;
-}
-</style>

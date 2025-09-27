@@ -3,23 +3,20 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    es6: true
+    es2022: true,
   },
   parser: "vue-eslint-parser",
   parserOptions: {
-    parser: "babel-eslint",
+    parser: "@babel/eslint-parser",
     sourceType: "module",
-    ecmaVersion: 2020
+    ecmaVersion: 2022,
+    requireConfigFile: false,
   },
-  extends: [
-    "plugin:vue/essential",
-    "eslint:recommended",
-    "@vue/prettier"
-  ],
+  extends: ["plugin:vue/vue3-essential", "eslint:recommended", "@vue/prettier"],
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
     "vue/multi-word-component-names": "off",
-    "no-undef": "off"
-  }
+    "no-undef": "off",
+  },
 };

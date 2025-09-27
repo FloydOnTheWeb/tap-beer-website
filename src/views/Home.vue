@@ -1,52 +1,100 @@
 <template>
   <div class="home">
-    <div id="jumbo">
-      <div class="container jumbotron jumbotron-fluid mb-0 mt-0 pt-5 pb-5">
-        <div class="container">
-          <img alt="Vue logo" src="../assets/tap-beer.png" />
-          <h1 class="display-4">World Class Signature Beers</h1>
-          <p class="lead">Malted from fresh barley extract from our farms.</p>
+    <!-- Hero Section -->
+    <div
+      class="hero-section bg-beer-blue bg-blend-soft-light bg-cover bg-center relative"
+      :style="{
+        backgroundImage: 'url(' + require('@/assets/beer-drink.png') + ')',
+      }"
+    >
+      <div class="container mx-auto px-4 py-16 md:py-24">
+        <div class="text-center">
+          <img
+            alt="Tap Beer logo"
+            src="@/assets/tap-beer.png"
+            class="mx-auto mb-8 h-24 w-auto"
+          />
+          <h1 class="text-4xl md:text-6xl font-bold text-beer-dark mb-6">
+            World Class Signature Beers
+          </h1>
+          <p class="text-xl md:text-2xl text-beer-dark/80 max-w-2xl mx-auto">
+            Malted from fresh barley extract from our farms.
+          </p>
         </div>
       </div>
     </div>
-    <div id="drinks">
-      <div class="container">
-        <div class="row">
+
+    <!-- Featured Drinks Section -->
+    <div class="bg-beer-gold py-16">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-beer-dark text-center mb-12">
+          Featured Drinks
+        </h2>
+        <p class="text-center text-beer-dark/70 mb-4">
+          Debug: Loading: {{ loading }}, Error: {{ error }}, Drinks Count:
+          {{ drinks.length }}
+        </p>
+        <!-- Loading State -->
+        <div v-if="loading" class="text-center py-8">
+          <div
+            class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-beer-gold"
+          ></div>
+          <p class="mt-2 text-beer-dark">Loading featured drinks...</p>
+        </div>
+
+        <!-- Error State -->
+        <div v-else-if="error" class="text-center py-8">
+          <p class="text-red-600">Error loading drinks: {{ error }}</p>
+        </div>
+
+        <!-- Drinks Grid -->
+        <div
+          v-else-if="drinks.length > 0"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
           <div
             v-for="drink in drinks"
-            v-bind:key="drink.id"
-            class="drink-specials col-sm-3 p-4"
+            :key="drink.id"
+            class="drink-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
           >
-            <div class="row flex-column-reverse flex-lg-row no-gutters">
-              <div class="col-sm-12 col-md-2">
-                <router-link
-                  :to="{
-                    path: `/drinks/${drink.id}`,
-                    params: { id: drink.id }
-                  }"
-                  class="no-style"
-                  ><img
-                    :src="drink.image_url"
-                    class="card-img"
+            <div class="flex flex-col md:flex-row">
+              <!-- Drink Image -->
+              <div class="md:w-1/3">
+                <router-link :to="`/drinks/${drink.id}`" class="block">
+                  <img
+                    :src="`https://punkapi.online/v3/images/${String(drink.id).padStart(3, '0')}.png`"
                     :alt="drink.name"
-                    :id="drink.id"
-                /></router-link>
+                    class="w-full h-48 md:h-full object-cover"
+                    loading="lazy"
+                  />
+                </router-link>
               </div>
-              <div class="featured-bottle col-sm-12 col-md-10">
-                <div class="card-body">
-                  <router-link :to="`/drinks/${drink.id}`" class="no-style"
-                    ><div class="card-title">{{ drink.name }}</div></router-link
+
+              <!-- Drink Info -->
+              <div class="md:w-2/3 p-6 flex flex-col justify-center">
+                <router-link :to="`/drinks/${drink.id}`" class="block group">
+                  <h3
+                    class="text-xl font-bold text-beer-dark mb-2 group-hover:text-beer-orange transition-colors duration-200"
                   >
-                  <p class="card-text tagline mb-1">
-                    {{ drink.tagline.replace(".", "") }}
-                  </p>
-                  <small class="card-text"
-                    >{{ drink.volume.value }} {{ drink.volume.unit }}</small
-                  >
+                    {{ drink.name }}
+                  </h3>
+                </router-link>
+                <p class="text-beer-dark/70 mb-3 text-sm">
+                  {{ drink.tagline.replace(".", "") }}
+                </p>
+                <div class="text-sm text-beer-dark/60">
+                  {{ drink.volume.value }} {{ drink.volume.unit }}
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- No Drinks State -->
+        <div v-else class="text-center py-8">
+          <p class="text-beer-dark">
+            No featured drinks available at the moment.
+          </p>
         </div>
       </div>
     </div>
@@ -54,72 +102,63 @@
 </template>
 
 <script>
-import Vue from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 import axios from "axios";
-import VueAxios from "vue-axios";
-Vue.use(VueAxios, axios);
 
-export default {
-  mounted() {
-    this.fetchDrinks();
-  },
-  data() {
+export default defineComponent({
+  name: "Home",
+  setup() {
+    const drinks = ref([]);
+    const loading = ref(false);
+    const error = ref(null);
+
+    const fetchDrinks = async () => {
+      try {
+        loading.value = true;
+        error.value = null;
+        console.log("Starting to fetch drinks...");
+        const response = await axios.get(
+          "https://punkapi.online/v3/beers?page=1&ids=6,10,25,8",
+        );
+        console.log("API Response:", response.data);
+        // The API returns a direct array
+        drinks.value = response.data;
+        console.log("Fetched drinks:", drinks.value);
+        console.log("Number of drinks:", drinks.value.length);
+      } catch (err) {
+        error.value = err.message;
+        console.error("Error fetching drinks:", err);
+        console.error("Error details:", err.response?.data);
+      } finally {
+        loading.value = false;
+      }
+    };
+
+    onMounted(() => {
+      console.log("Home component mounted, fetching drinks...");
+      fetchDrinks();
+    });
+
     return {
-      drinks: []
+      drinks,
+      loading,
+      error,
+      fetchDrinks,
     };
   },
-
-  methods: {
-    fetchDrinks() {
-      axios
-        .get("https://api.punkapi.com/v2/beers?ids=6|10|25|8")
-        .then(response => (this.drinks = response.data))
-        .catch(error => console.log(error));
-    }
-  }
-};
+});
 </script>
+
 <style scoped>
-#jumbo {
-  background-color: #b8daff;
-  background-image: url(../assets/beer-drink.png);
-  background-position: center center;
-  background-size: cover;
+.hero-section {
   background-blend-mode: soft-light;
 }
-#jumbo .jumbotron {
-  background-color: transparent;
+
+.drink-card {
+  transition: transform 0.2s ease-in-out;
 }
-#drinks {
-  background-color: #eebb4d;
-}
-.card-title {
-  background-color: #1f2b33;
-  color: #ffffff;
-  border-radius: 0.25em;
-  padding-top: 0.25em;
-  padding-bottom: 0.25em;
-}
-.card-text.tagline {
-  font-size: 0.9em;
-}
-.no-style {
-  text-decoration: none;
-}
-@media screen and (max-width: 986px) {
-  .featured-bottle .card-body {
-    padding-top: 0;
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .card-img {
-    max-height: 240px;
-    width: auto;
-  }
-  .drink-specials .no-gutters {
-    background-color: #fecb89;
-    padding-bottom: 1em;
-    border-radius: 0.5em;
-  }
+
+.drink-card:hover {
+  transform: translateY(-2px);
 }
 </style>

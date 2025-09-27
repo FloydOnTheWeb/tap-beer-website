@@ -1,36 +1,36 @@
 <template>
-  <div id="app">
+  <div id="app" class="min-h-screen bg-gray-50">
     <Navigation />
     <Breadcrumb />
-    <router-view />
+    <main class="flex-1">
+      <router-view />
+    </main>
     <AppFooter />
   </div>
 </template>
+
 <script>
-import Navigation from "@/components/Navigation";
+import { defineComponent } from "vue";
+import Navigation from "@/components/Navigation.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 import AppFooter from "@/components/AppFooter.vue";
 
-export default {
+export default defineComponent({
+  name: "App",
   components: {
     Navigation,
     Breadcrumb,
-    AppFooter
-  }
-};
+    AppFooter,
+  },
+});
 </script>
+
 <style>
 #app {
-  font-family: Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #1f2b33;
+  @apply font-sans antialiased text-beer-dark;
 }
 
-.breadcrumb-container > a,
-a.router-link-active {
-  color: #919ea9;
-  text-decoration: none;
+.router-link-active {
+  @apply text-beer-gray no-underline;
 }
 </style>

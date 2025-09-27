@@ -1,18 +1,17 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-import "mutationobserver-shim";
 
-import Vue from "vue";
-import "./plugins/bootstrap-vue";
+import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
+
+import "./assets/styles/main.css";
 
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all.js";
 
-Vue.config.productionTip = false;
+const app = createApp(App);
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount("#app");
+app.use(router);
+
+app.mount("#app");

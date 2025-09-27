@@ -1,16 +1,39 @@
 <template>
-  <footer class="base-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 copyright mt-2 mb-0">
-          <p class="float-left mb-2">
-            <a @click="scrollToTop" class="scroll-up">Back to top</a>
-          </p>
-          <p class="text-right mb-2">
-            created with <i class="fa fa-heart"></i> by
-            <a href="https://www.floydontheweb.com" target="_blank"
-              ><i>FloydOnTheWeb</i></a
+  <footer class="bg-beer-dark text-beer-gray py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <button
+            @click="scrollToTop"
+            class="text-beer-gray hover:text-white transition-colors duration-200 flex items-center space-x-2"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 10l7-7m0 0l7 7m-7-7v18"
+              ></path>
+            </svg>
+            <span>Back to top</span>
+          </button>
+        </div>
+        <div class="text-center md:text-right">
+          <p class="text-sm">
+            Created with <i class="fa fa-heart text-red-500"></i> by
+            <a
+              href="https://www.floydontheweb.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-beer-gray hover:text-white transition-colors duration-200 italic"
+            >
+              FloydOnTheWeb
+            </a>
           </p>
         </div>
       </div>
@@ -19,29 +42,17 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "AppFooter",
   methods: {
     scrollToTop() {
-      window.scrollTo(0, 0);
-    }
-  }
-};
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    },
+  },
+});
 </script>
-
-<style scoped>
-footer.base-footer {
-  background-color: #1f2b33;
-}
-footer.base-footer .container,
-footer.base-footer a {
-  color: #919ea9;
-  font-size: 1em;
-  text-decoration: none;
-}
-footer.base-footer .fa-heart {
-  color: #ff5f40;
-}
-footer.base-footer .scroll-up {
-  cursor: hand;
-}
-</style>
